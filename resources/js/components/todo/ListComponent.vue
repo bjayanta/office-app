@@ -2,18 +2,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <article>
-                    <h3>Todo list</h3>
-                    <p>
-                        Todo list Component.
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Create new task</button>
-                    </p>
-                </article>
+                <ul class="list-group">
+                    <li class="list-group-item active">
+                        <strong>All todo tasks</strong>
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Create new task</button>
+                    </li>
 
-                <ul>
-                    <li v-for="task in tasks">
-                        <a href="" class="task"><strong>{{ task.title }}</strong></a>
-                        <a href="">Delete</a>
+                    <li class="list-group-item" v-for="task in tasks">
+                        <strong>{{ task.title }}</strong>
                         <p>{{ task.note }}</p>
                     </li>
                 </ul>

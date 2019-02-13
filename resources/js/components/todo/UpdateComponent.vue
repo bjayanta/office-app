@@ -1,11 +1,11 @@
 <template>
     <!-- Modal -->
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form action="" method="post" @submit="saveChanges">
+                <form action="" method="post" @submit="updateChanges">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createModalLabel">Create a new task</h5>
+                        <h5 class="modal-title" id="updateModalLabel">Update task information</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -27,7 +27,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Update changes</button>
                     </div>
                 </form>
             </div>
@@ -48,40 +48,44 @@
                 for(var i in this.errors[field]) {
                     message += this.errors[field][i];
                 }
-
-                // return this.errors[field][0];
             }
 
             return message;
         }
 
-        record(errors) {
-            this.errors = errors.errors;
+        record(data) {
+            this.errors = data.errors;
         }
     }
 
     export default {
         data() {
             return {
-                form: {
-                    title: '',
-                    note: '',
-                },
+                form: {},
                 errors: new Errors(),
             };
         },
+        created() {
+            Event.$on('editTask', data => {
+                var $this = this;
+
+                // console.log(data);
+                this.form = data;
+
+                // empty the errors object
+                $('#updateModal').on('hidden.bs.modal', function (e) {
+                    $this.errors.record({errors: {}});
+                });
+            });
+        },
         methods: {
-            saveChanges: function(e) {
+            updateChanges: function(e) {
                 var $this = this;
 
                 // send post request
-                axios.post('./todo', $this.form).then(response => {
-                    // console.log(response.data);
-                    Event.$emit('newTask', response.data);
-
-                    // empty the current form
-                    $this.form.title = '';
-                    $this.form.note = '';
+                axios.patch('./todo/' + $this.form.id, $this.form).then(response => {
+                    console.log(response.data);
+                    // Event.$emit('replaceTask', response.data);
                 }).catch(errors => {
                     $this.errors.record(errors.response.data);
                     // console.log(errors.response.data);

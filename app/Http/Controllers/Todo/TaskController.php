@@ -42,9 +42,18 @@ class TaskController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'title' => 'required|min:3',
+            // 'note' => 'required',
+        ]);
+
+        $todo = new Todo();
+        $todo->title = $request->title;
+        $todo->note = $request->note;
+        $todo->save();
+
+        return response()->json($request->all(), 200);
     }
 
     /**
@@ -76,9 +85,18 @@ class TaskController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $request->validate([
+            'title' => 'required|min:3',
+            // 'note' => 'required',
+        ]);
+
+        $todo = Todo::findOrFail($id);
+        $todo->title = $request->title;
+        $todo->note = $request->note;
+        $todo->save();
+
+        return response()->json($request->all(), 200);
     }
 
     /**
@@ -87,8 +105,8 @@ class TaskController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        Todo::where('id', $id)->delete();
+        return response()->json(['success' => 'Information deleted successfully.']);
     }
 }

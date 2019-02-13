@@ -9,6 +9,8 @@ require('./bootstrap');
 import VueRouter from 'vue-router';
 
 window.Vue = require('vue');
+window.Event = new Vue();
+
 Vue.use(VueRouter);
 
 /**
@@ -29,6 +31,7 @@ Vue.component('passport-personal-access-tokens', require('./components/passport/
 
 // todo component
 Vue.component('todo-create', require('./components/todo/CreateComponent.vue'));
+Vue.component('todo-update', require('./components/todo/UpdateComponent.vue'));
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 

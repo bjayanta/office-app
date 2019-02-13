@@ -13,5 +13,8 @@
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
+<!-- ionicons -->
+<link href="https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css" rel="stylesheet">
+
 <!-- Styles -->
 <link href="{{ asset('public/user/css/app.css') }}" rel="stylesheet">

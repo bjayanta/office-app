@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 12, 2019 at 12:51 PM
+-- Generation Time: Feb 13, 2019 at 01:03 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -118,6 +118,11 @@ CREATE TABLE `oauth_access_tokens` (
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('02fb6bf5cd46dfea60f2e9b2d6467f97ed8075011eae09af78af85a90fcbf75800d08bfff3b7f2f7', 1, 1, 'Test', '[]', 1, '2019-02-12 03:25:35', '2019-02-12 03:25:35', '2020-02-12 09:25:35'),
+('3d232840c45a53e788cb1d3a9a14a6648e95d85952ef3bb598eb6d9ab5b9d36f0f1c3f88eb4dc808', 1, 1, 'Hello', '[]', 1, '2019-02-13 00:44:15', '2019-02-13 00:44:15', '2020-02-13 06:44:15'),
+('47ddda3f334f74b9065df43cb3c4fe1cd4a25f83db0f9d7dfcf3f9d6805e254edcca17d2b2c78517', 2, 1, 'MyApp', '[]', 0, '2019-02-13 05:48:24', '2019-02-13 05:48:24', '2020-02-13 11:48:24'),
+('702b0ea54c08031f7d0d776eeba385dc277d8451e558e962b15f008bd71a1bea8f78d53d560a8024', 1, 1, 'Test', '[]', 0, '2019-02-13 02:27:08', '2019-02-13 02:27:08', '2020-02-13 08:27:08'),
+('8980d7981824540501bee5c31d050ffa3368535819aaf13310d8b63178ccba638d7e1008e4f42737', 2, 1, 'MyApp', '[]', 0, '2019-02-13 05:38:06', '2019-02-13 05:38:06', '2020-02-13 11:38:06'),
+('91956d5e03b52d8eaf1466292664686d56ec61ffa4197a34bbc0e41e97f3be726b8d4c5ea73d2e84', 2, 1, 'MyApp', '[]', 0, '2019-02-13 05:49:09', '2019-02-13 05:49:09', '2020-02-13 11:49:09'),
 ('b14946fa8f809b79a45e16e575c538b33178d826d8f947d109250b6e9f340e80d27a9aed053f3df5', 1, 1, 'Test', '[]', 1, '2019-02-12 03:33:43', '2019-02-12 03:33:43', '2020-02-12 09:33:43');
 
 -- --------------------------------------------------------
@@ -253,7 +258,7 @@ CREATE TABLE `roles` (
 CREATE TABLE `todos` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -263,7 +268,10 @@ CREATE TABLE `todos` (
 --
 
 INSERT INTO `todos` (`id`, `title`, `note`, `created_at`, `updated_at`) VALUES
-(1, 'Android', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, eius? Error, assumenda itaque? Nam quas tenetur eaque, voluptatum obcaecati amet provident qui eveniet nisi excepturi et atque possimus magnam nemo impedit exercitationem hic reiciendis aspernatur sequi. Est, vero earum? Minus in facilis nobis recusandae maxime eos sed sint dolore commodi?', '2019-02-11 18:00:00', '2019-02-11 18:00:00');
+(1, 'Android', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, eius? Error, assumenda itaque? Nam quas tenetur eaque, voluptatum obcaecati amet provident qui eveniet nisi excepturi et atque possimus magnam nemo impedit exercitationem hic reiciendis aspernatur sequi. Est, vero earum? Minus in facilis nobis recusandae maxime eos sed sint dolore commodi?', '2019-02-11 18:00:00', '2019-02-11 18:00:00'),
+(2, 'Angular 7', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, eius? Error, assumenda itaque? Nam quas tenetur eaque, voluptatum obcaecati amet provident qui eveniet nisi excepturi et atque possimus magnam nemo impedit exercitationem hic reiciendis aspernatur sequi. Est, vero earum? Minus in facilis nobis recusandae.', '2019-02-12 22:28:04', '2019-02-12 22:28:04'),
+(10, 'Laravel 5.7', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam ratione necessitatibus facere maxime ipsam recusandae iure, nisi non officiis exercitationem?', '2019-02-13 02:26:18', '2019-02-13 03:53:28'),
+(12, 'Python', 'Study with python 3.', '2019-02-13 02:26:35', '2019-02-13 03:27:39');
 
 -- --------------------------------------------------------
 
@@ -304,7 +312,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `account_type`, `activation_token`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, '5mJPAuPnz6msetg2Fg5hoARxV3pxTpS4bomJ4bmqD3yJ5EpwaBCNU3gOgRpd', '2019-02-12 01:43:28', '2019-02-12 01:44:06');
+(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, '5mJPAuPnz6msetg2Fg5hoARxV3pxTpS4bomJ4bmqD3yJ5EpwaBCNU3gOgRpd', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
+(2, 'Jayanta Biswas', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$FJkWCH3yzXF1/bBzzxGfJu8Y0K/xGONkL3TatUc4obqX9XyscXKWm', 'general', NULL, 1, NULL, '2019-02-13 05:38:06', '2019-02-13 05:39:00');
 
 --
 -- Indexes for dumped tables
@@ -468,7 +477,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `todos`
 --
 ALTER TABLE `todos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `usermeta`
@@ -480,7 +489,7 @@ ALTER TABLE `usermeta`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

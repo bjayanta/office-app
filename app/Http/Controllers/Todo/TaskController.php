@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Todo;
 
+use Auth;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,6 +50,7 @@ class TaskController extends Controller {
         ]);
 
         $todo = new Todo();
+        $todo->user_id = Auth::user()->id;
         $todo->title = $request->title;
         $todo->note = $request->note;
         $todo->save();

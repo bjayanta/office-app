@@ -44,6 +44,7 @@ Vue.component('todo-update', require('./components/todo/UpdateComponent.vue'));
 const routes = [
     { path: '/', component: require('./components/HomeComponent.vue') },
     { path: '/todo', component: require('./components/todo/ListComponent.vue') },
+    { path: '/attendance', component: require('./components/attendance/AttendanceComponent.vue') },
     { path: '/passport', component: require('./components/PassportComponent.vue') },
 ];
 

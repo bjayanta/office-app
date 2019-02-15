@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +15,7 @@ class TodoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $records = Todo::all();
+        $records = Todo::where('user_id', Auth::user()->id)->get();
         return response()->json(['success' => $records], 200);
     }
 

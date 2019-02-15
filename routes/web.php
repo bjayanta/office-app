@@ -21,6 +21,9 @@ Route::resources([
 
 ]);
 
+// attendance route
+Route::get('/attendance', 'AttendanceController@index')->name('attendance');
+
 Route::get('/locale/{lang}', function($lang) {
     \Session::put('locale', $lang);
     return redirect()->back();

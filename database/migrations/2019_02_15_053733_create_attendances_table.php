@@ -4,19 +4,19 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTodosTable extends Migration
+class CreateAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('todos', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('title');
-            $table->text('note')->nullable();
+            $table->string('key');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTodosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todos');
+        Schema::dropIfExists('attendances');
     }
 }

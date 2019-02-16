@@ -72,29 +72,5 @@ class LoginController extends Controller
         return [$this->username() . '.exists' => 'The selected email is invalid or you need to activate your account.'];
     }
 
-    /**
-     * The user has been authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return mixed
-     */
-    protected function authenticated(Request $request, $user) {
-        $attendance = new Attendance();
-        $attendance->user_id = $user->id;
-        $attendance->key = now()->timestamp;
-        $attendance->save();
-    }
-
-    /**
-     * The user has logged out of the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
-    protected function loggedOut(Request $request) {
-        dd($request->session());
-    }
-
 
 }

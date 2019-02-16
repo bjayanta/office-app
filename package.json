@@ -20,6 +20,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
+        "laravel-vue-pagination": "^2.2.0",
         "vue-router": "^3.0.2"
     }
 }

@@ -16,7 +16,8 @@ class CreateAttendancesTable extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('key');
+            $table->string('ip_address')->nullable();
+            $table->string('status')->default('in');
             $table->timestamps();
         });
     }

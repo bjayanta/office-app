@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
+        @php
+        $to = \Carbon\Carbon::parse(date('Y-m-d') . ' 1:30:00');
+        $from = \Carbon\Carbon::parse('2019-02-16 1:40:00');
 
-    {{-- <pre>{{ print_r(Auth::loginUsingId(1), 1) }}</pre> --}}
-    {{-- <pre>{{ print_r(session()->all(), 1) }}</pre> --}}
-    {{-- {{ now()->timestamp }} --}}
-    {{-- {{ print_r(session()->all(), 1) }} --}}
+        echo $to->diffInMinutes($from);
+        @endphp
+    </div>
 
+    <!-- all the view -->
     <router-view></router-view>
 @endsection

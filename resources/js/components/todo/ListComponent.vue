@@ -10,7 +10,7 @@
                         </button>
                     </li>
 
-                    <li class="list-group-item" v-for="(task, key) in tasks">
+                    <li class="list-group-item" v-for="(task, key) in tasks" :key="task.id">
                         <div class="row">
                             <div class="col-md-10">
                                 <strong>{{ task.title }}</strong>

@@ -39,7 +39,12 @@ class TraceUserLogout
         $where[] = ['id', '=', $attendance->id];
         // dd($where);
 
+        // realy leave
+        $to = \Carbon\Carbon::now();
+        $from = \Carbon\Carbon::parse(config('coderill.exitTime'));
+
         $attendance = Attendance::where($where)->firstOrFail();
+        $attendance->early_leave = $to->diffInMinutes($from);
         $attendance->status = 'out';
         $attendance->save();
     }

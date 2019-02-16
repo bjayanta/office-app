@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 13, 2019 at 01:03 PM
+-- Generation Time: Feb 16, 2019 at 11:21 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -67,6 +67,35 @@ CREATE TABLE `admin_role` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attendances`
+--
+
+CREATE TABLE `attendances` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `ip_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `late_entry` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `early_leave` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'in',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`id`, `user_id`, `ip_address`, `late_entry`, `early_leave`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, '::1', '399', '140', 'out', '2019-02-16 09:39:20', '2019-02-16 09:39:46'),
+(2, 2, '::1', '400', '134', 'out', '2019-02-16 09:40:12', '2019-02-16 09:45:20'),
+(3, 2, '::1', '405', '132', 'out', '2019-02-16 09:45:27', '2019-02-16 09:47:25'),
+(4, 2, '192.168.0.77', '407', '131', 'out', '2019-02-16 09:47:39', '2019-02-16 09:48:04'),
+(5, 1, '::1', '408', '98', 'out', '2019-02-16 09:48:20', '2019-02-16 10:21:12'),
+(6, 1, '::1', '441', NULL, 'in', '2019-02-16 10:21:15', '2019-02-16 10:21:15');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -92,7 +121,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2018_12_03_124721_create_permissions_table', 1),
 (10, '2018_12_04_123752_create_roles_table', 1),
 (11, '2019_02_12_073945_create_sponsors_table', 1),
-(12, '2019_02_12_103133_create_todos_table', 2);
+(12, '2019_02_12_103133_create_todos_table', 2),
+(17, '2019_02_15_053733_create_attendances_table', 3);
 
 -- --------------------------------------------------------
 
@@ -312,8 +342,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `account_type`, `activation_token`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, '5mJPAuPnz6msetg2Fg5hoARxV3pxTpS4bomJ4bmqD3yJ5EpwaBCNU3gOgRpd', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
-(2, 'Jayanta Biswas', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$FJkWCH3yzXF1/bBzzxGfJu8Y0K/xGONkL3TatUc4obqX9XyscXKWm', 'general', NULL, 1, NULL, '2019-02-13 05:38:06', '2019-02-13 05:39:00');
+(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, '3T1c7vVcnT0IDLn1G2235KRc6dMrPTppW5CExi9J76ug8OACETufg6vIxJd2', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
+(2, 'Jayanta Biswas', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$FJkWCH3yzXF1/bBzzxGfJu8Y0K/xGONkL3TatUc4obqX9XyscXKWm', 'general', NULL, 1, 'dahPUWcWLXbDMo9poPQpGsI3TE3nOAsbkbVmqz6y5byd9rXzLGVzfzhaUufN', '2019-02-13 05:38:06', '2019-02-13 05:39:00');
 
 --
 -- Indexes for dumped tables
@@ -340,6 +370,12 @@ ALTER TABLE `admins`
 ALTER TABLE `admin_role`
   ADD KEY `admin_role_admin_id_foreign` (`admin_id`),
   ADD KEY `admin_role_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `attendances`
+--
+ALTER TABLE `attendances`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -444,10 +480,16 @@ ALTER TABLE `admins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `attendances`
+--
+ALTER TABLE `attendances`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`

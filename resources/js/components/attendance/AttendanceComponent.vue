@@ -13,9 +13,9 @@
                             <th scope="col">#</th>
                             <th scope="col">Date</th>
                             <th scope="col">IP Address</th>
-                            <th scope="col">In Time</th>
-                            <th scope="col">Out Time</th>
+                            <th scope="col">Entry</th>
                             <th scope="col">LE</th>
+                            <th scope="col">Exit</th>
                             <th scope="col">RL</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -27,8 +27,8 @@
                             <td>{{ record.date }}</td>
                             <td>{{ record.ip }}</td>
                             <td>{{ record.in }}</td>
-                            <td>{{ record.out }}</td>
                             <td>{{ record.le }}</td>
+                            <td>{{ record.out }}</td>
                             <td>{{ record.el }}</td>
                             <td>{{ record.status }}</td>
                         </tr>

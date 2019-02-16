@@ -21,22 +21,14 @@ class AttendanceController extends Controller {
         $data = Attendance::where('user_id', Auth::user()->id)->paginate(10);
 
         foreach($data as $key => $row) {
-            // late entry
-            $leTo = Carbon::parse(date('Y-m-d') . ' 14:00:00');
-            $leFrom = Carbon::parse($row->created_at);
-
-            // early leave
-            $elTo = Carbon::parse($row->updated_at);
-            $elFrom = Carbon::parse(date('Y-m-d') . ' 15:00:00');
-
             $data[$key]->id = $row->id;
             $data[$key]->user = $row->user_id;
             $data[$key]->ip = $row->ip_address;
             $data[$key]->date = Carbon::parse($row->created_at)->format('j M, y');
             $data[$key]->in = Carbon::parse($row->created_at)->format('h:i');
             $data[$key]->out = Carbon::parse($row->updated_at)->format('h:i');
-            $data[$key]->le = $leTo->diffInMinutes($leFrom);
-            $data[$key]->el = $elTo->diffInMinutes($elFrom);
+            $data[$key]->le = $row->late_entry;
+            $data[$key]->el = $row->early_leave;
             $data[$key]->status = ucwords($row->status);
         }
 

@@ -28,9 +28,14 @@ class TraceUserLogin
     public function handle(Login $event) {
         // dd($event->user);
 
+        // late entry
+        $to = \Carbon\Carbon::parse(config('coderill.entryTime'));
+        $from = \Carbon\Carbon::now();
+
         $attendance = new Attendance();
         $attendance->user_id = $event->user->id;
         $attendance->ip_address = \Request::ip();
+        $attendance->late_entry = $to->diffInMinutes($from);
         $attendance->save();
     }
 }

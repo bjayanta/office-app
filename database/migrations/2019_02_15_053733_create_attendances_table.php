@@ -17,6 +17,8 @@ class CreateAttendancesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('ip_address')->nullable();
+            $table->string('late_entry')->nullable();
+            $table->string('early_leave')->nullable();
             $table->string('status')->default('in');
             $table->timestamps();
         });

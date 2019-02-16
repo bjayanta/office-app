@@ -31,16 +31,19 @@ Route::get('/locale/{lang}', function($lang) {
 
 // Admin controller
 Route::group(['namespace' => 'Admin'], function() {
-	Route::get('admin/home', 'HomeController@index')->name('admin.home');
+    Route::get('admin/home', 'HomeController@index')->name('admin.home');
 
-	// account resource routes
-	Route::resource('admin/account', 'AccountController');
+    // attendance route
+    Route::get('admin/attendance', 'AttendanceController@index')->name('admin.attendance');
+    Route::get('admin/attendance/search', 'AttendanceController@search')->name('admin.attendance.search');
 
-	// role resource routes
-	Route::resource('admin/role', 'RoleController');
-
-	// permission resource routes
-	Route::resource('admin/permission', 'PermissionController');
+    // all the resource route
+	Route::resources([
+        'admin/account' => 'AccountController', // account resource routes
+        'admin/role' => 'RoleController', // role resource routes
+        'admin/permission' => 'PermissionController', // permission resource routes
+        'admin/profile' => 'ProfileController',
+    ]);
 
 	// admin auth
 	Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');

@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <article>
                     <h1>Attendance Component</h1>
-                    <p>I'm an sttendance component.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sapiente, ab alias repellendus exercitationem fuga omnis fugit voluptatum nemo, ad, ipsam excepturi esse ipsum sint expedita mollitia sequi recusandae est. Tempora aut blanditiis dolore debitis saepe sequi placeat quo accusantium officia quae commodi magni natus sit, quidem quos nulla quisquam!</p>
                 </article>
 
                 <table class="table">

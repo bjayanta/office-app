@@ -55568,7 +55568,11 @@ var staticRenderFns = [
     return _c("article", [
       _c("h1", [_vm._v("Attendance Component")]),
       _vm._v(" "),
-      _c("p", [_vm._v("I'm an sttendance component.")])
+      _c("p", [
+        _vm._v(
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sapiente, ab alias repellendus exercitationem fuga omnis fugit voluptatum nemo, ad, ipsam excepturi esse ipsum sint expedita mollitia sequi recusandae est. Tempora aut blanditiis dolore debitis saepe sequi placeat quo accusantium officia quae commodi magni natus sit, quidem quos nulla quisquam!"
+        )
+      ])
     ])
   },
   function() {

@@ -2,6 +2,7 @@
     <a href="{{ route('admin.home') }}">Dashboard</a>
     <a href="{{ route('profile.index') }}">Profile</a>
     <a href="{{ route('admin.attendance') }}">Attendance</a>
+    <a href="{{ route('mission.index') }}">Mission</a>
     <a href="{{ route('account.index') }}">Users</a>
     <a href="{{ route('role.index') }}">Roles</a>
     <a href="{{ route('permission.index') }}">Permission</a>

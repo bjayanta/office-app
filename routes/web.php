@@ -45,7 +45,8 @@ Route::group(['namespace' => 'Admin'], function() {
         'admin/account' => 'AccountController', // account resource routes
         'admin/role' => 'RoleController', // role resource routes
         'admin/permission' => 'PermissionController', // permission resource routes
-        'admin/profile' => 'ProfileController',
+        'admin/profile' => 'ProfileController', // profile controller
+        'admin/mission' => 'MissionController', // mission resource controller
     ]);
 
 	// admin auth

@@ -53737,6 +53737,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
     mounted: function mounted() {
         console.log('Mission details component mounted.');
     }
@@ -54296,7 +54299,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54367,16 +54370,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        var _this = this;
-
-        axios.get('./mission').then(function (response) {
-            _this.missions = response.data;
-            console.log(response.data);
-        }).catch(function (error) {
-            return console.log(error);
-        });
-
+        this.getMissions();
         console.log('Mission component mounted.');
+    },
+
+    methods: {
+        getMissions: function getMissions() {
+            var _this = this;
+
+            axios.get('./mission').then(function (response) {
+                _this.missions = response.data;
+                console.log(response.data);
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        }
     }
 });
 
@@ -54407,9 +54415,9 @@ var render = function() {
                     _vm._v(_vm._s(key + 1))
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(mission.created_at))]),
+                  _c("td", [_vm._v(_vm._s(mission.date))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(mission.admin_id))]),
+                  _c("td", [_vm._v(_vm._s(mission.owner))]),
                   _vm._v(" "),
                   _c("td", [
                     _c(
@@ -54424,14 +54432,14 @@ var render = function() {
                       [
                         _c("strong", [_vm._v(_vm._s(mission.title))]),
                         _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(mission.note))])
+                        _c("p", [_vm._v(_vm._s(mission.description))])
                       ]
                     )
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(mission.priority))]),
+                  _c("td", [_vm._v(_vm._s(mission.priority.toUpperCase()))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(mission.status))]),
+                  _c("td", [_vm._v(_vm._s(mission.status.toUpperCase()))]),
                   _vm._v(" "),
                   _vm._m(2, true)
                 ])
@@ -54480,7 +54488,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
+        _c("th", { staticClass: "text-right", attrs: { scope: "col" } }, [
+          _vm._v("Action")
+        ])
       ])
     ])
   },
@@ -54488,7 +54498,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "test-right" }, [
+    return _c("td", { staticClass: "text-right" }, [
       _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Done")]),
       _vm._v(" "),
       _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Process")]),

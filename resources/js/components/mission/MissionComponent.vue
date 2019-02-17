@@ -17,24 +17,24 @@
                             <th scope="col">Mission</th>
                             <th scope="col">Priority</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" class="text-right">Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <tr v-for="(mission, key) in missions" :key="mission.id">
                             <th scope="row">{{ key + 1 }}</th>
-                            <td>{{ mission.created_at }}</td>
-                            <td>{{ mission.admin_id }}</td>
+                            <td>{{ mission.date }}</td>
+                            <td>{{ mission.owner }}</td>
                             <td>
                                 <a href="" data-toggle="modal" data-target="#detailsModal">
                                     <strong>{{ mission.title }}</strong>
-                                    <p>{{ mission.note }}</p>
+                                    <p>{{ mission.description }}</p>
                                 </a>
                             </td>
-                            <td>{{ mission.priority }}</td>
-                            <td>{{ mission.status }}</td>
-                            <td class="test-right">
+                            <td>{{ mission.priority.toUpperCase() }}</td>
+                            <td>{{ mission.status.toUpperCase() }}</td>
+                            <td class="text-right">
                                 <button class="btn btn-primary">Done</button>
                                 <button class="btn btn-warning">Process</button>
                                 <button class="btn btn-danger">Cancel</button>
@@ -58,15 +58,19 @@ export default {
         };
     },
     mounted() {
-        axios.get('./mission')
-            .then(response => {
-                this.missions = response.data;
-                console.log(response.data);
-            })
-            .catch(error => console.log(error));
-
+        this.getMissions();
         console.log('Mission component mounted.');
     },
+    methods: {
+        getMissions() {
+            axios.get('./mission')
+                .then(response => {
+                    this.missions = response.data;
+                    console.log(response.data);
+                })
+                .catch(error => console.log(error));
+        }
+    }
 }
 </script>
 

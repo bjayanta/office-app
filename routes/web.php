@@ -16,10 +16,13 @@ Route::get('/subscriber/activate/{email}/{token}', 'Auth\RegisterController@acti
 
 // user route
 Route::get('/', 'HomeController@index')->name('home');
-Route::resources([
-    'todo' => 'Todo\TaskController',
 
+Route::resources([
+    'todo' => 'Todo\TaskController', // todo resource route
 ]);
+
+// attendance route
+Route::get('/mission', 'MissionController@index')->name('mission');
 
 // attendance route
 Route::get('/attendance', 'AttendanceController@index')->name('attendance');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 16, 2019 at 11:21 AM
+-- Generation Time: Feb 17, 2019 at 01:06 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -53,6 +53,13 @@ CREATE TABLE `admins` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `phone`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Suman Rajvhar', '01712179034', 'uis360.sraj@gmail.com', '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 1, NULL, '2019-02-16 18:00:00', '2019-02-16 18:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -91,7 +98,14 @@ INSERT INTO `attendances` (`id`, `user_id`, `ip_address`, `late_entry`, `early_l
 (3, 2, '::1', '405', '132', 'out', '2019-02-16 09:45:27', '2019-02-16 09:47:25'),
 (4, 2, '192.168.0.77', '407', '131', 'out', '2019-02-16 09:47:39', '2019-02-16 09:48:04'),
 (5, 1, '::1', '408', '98', 'out', '2019-02-16 09:48:20', '2019-02-16 10:21:12'),
-(6, 1, '::1', '441', NULL, 'in', '2019-02-16 10:21:15', '2019-02-16 10:21:15');
+(6, 1, '::1', '441', '95', 'out', '2019-02-16 10:21:15', '2019-02-16 10:24:51'),
+(7, 2, '::1', '5', NULL, 'in', '2019-02-17 02:54:37', '2019-02-17 02:54:37'),
+(8, 2, '::1', '153', NULL, 'in', '2019-02-17 05:33:30', '2019-02-17 05:33:30'),
+(9, 2, '::1', '168', NULL, 'in', '2019-02-17 05:48:31', '2019-02-17 05:48:31'),
+(10, 2, '::1', '182', NULL, 'in', '2019-02-17 06:02:12', '2019-02-17 06:02:12'),
+(11, 2, '::1', '443', NULL, 'in', '2019-02-17 10:23:18', '2019-02-17 10:23:18'),
+(12, 2, '::1', '503', NULL, 'in', '2019-02-17 11:23:29', '2019-02-17 11:23:29'),
+(13, 2, '::1', '511', NULL, 'in', '2019-02-17 11:31:12', '2019-02-17 11:31:12');
 
 -- --------------------------------------------------------
 
@@ -122,7 +136,26 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2018_12_04_123752_create_roles_table', 1),
 (11, '2019_02_12_073945_create_sponsors_table', 1),
 (12, '2019_02_12_103133_create_todos_table', 2),
-(17, '2019_02_15_053733_create_attendances_table', 3);
+(17, '2019_02_15_053733_create_attendances_table', 3),
+(19, '2019_02_17_133154_create_missions_table', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `missions`
+--
+
+CREATE TABLE `missions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `admin_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'low' COMMENT 'low/medium/high/emergency',
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'pending/process/done/cancel',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -149,10 +182,11 @@ CREATE TABLE `oauth_access_tokens` (
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('02fb6bf5cd46dfea60f2e9b2d6467f97ed8075011eae09af78af85a90fcbf75800d08bfff3b7f2f7', 1, 1, 'Test', '[]', 1, '2019-02-12 03:25:35', '2019-02-12 03:25:35', '2020-02-12 09:25:35'),
 ('3d232840c45a53e788cb1d3a9a14a6648e95d85952ef3bb598eb6d9ab5b9d36f0f1c3f88eb4dc808', 1, 1, 'Hello', '[]', 1, '2019-02-13 00:44:15', '2019-02-13 00:44:15', '2020-02-13 06:44:15'),
-('47ddda3f334f74b9065df43cb3c4fe1cd4a25f83db0f9d7dfcf3f9d6805e254edcca17d2b2c78517', 2, 1, 'MyApp', '[]', 0, '2019-02-13 05:48:24', '2019-02-13 05:48:24', '2020-02-13 11:48:24'),
+('47ddda3f334f74b9065df43cb3c4fe1cd4a25f83db0f9d7dfcf3f9d6805e254edcca17d2b2c78517', 2, 1, 'MyApp', '[]', 1, '2019-02-13 05:48:24', '2019-02-13 05:48:24', '2020-02-13 11:48:24'),
+('5230850efcc2f6c20aa8c80ab33fc52daf66ea561240ce27ec1d98442f509e15c3caea62663f0f8c', 2, 1, 'hello', '[]', 0, '2019-02-17 06:02:22', '2019-02-17 06:02:22', '2020-02-17 12:02:22'),
 ('702b0ea54c08031f7d0d776eeba385dc277d8451e558e962b15f008bd71a1bea8f78d53d560a8024', 1, 1, 'Test', '[]', 0, '2019-02-13 02:27:08', '2019-02-13 02:27:08', '2020-02-13 08:27:08'),
-('8980d7981824540501bee5c31d050ffa3368535819aaf13310d8b63178ccba638d7e1008e4f42737', 2, 1, 'MyApp', '[]', 0, '2019-02-13 05:38:06', '2019-02-13 05:38:06', '2020-02-13 11:38:06'),
-('91956d5e03b52d8eaf1466292664686d56ec61ffa4197a34bbc0e41e97f3be726b8d4c5ea73d2e84', 2, 1, 'MyApp', '[]', 0, '2019-02-13 05:49:09', '2019-02-13 05:49:09', '2020-02-13 11:49:09'),
+('8980d7981824540501bee5c31d050ffa3368535819aaf13310d8b63178ccba638d7e1008e4f42737', 2, 1, 'MyApp', '[]', 1, '2019-02-13 05:38:06', '2019-02-13 05:38:06', '2020-02-13 11:38:06'),
+('91956d5e03b52d8eaf1466292664686d56ec61ffa4197a34bbc0e41e97f3be726b8d4c5ea73d2e84', 2, 1, 'MyApp', '[]', 1, '2019-02-13 05:49:09', '2019-02-13 05:49:09', '2020-02-13 11:49:09'),
 ('b14946fa8f809b79a45e16e575c538b33178d826d8f947d109250b6e9f340e80d27a9aed053f3df5', 1, 1, 'Test', '[]', 1, '2019-02-12 03:33:43', '2019-02-12 03:33:43', '2020-02-12 09:33:43');
 
 -- --------------------------------------------------------
@@ -342,7 +376,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `account_type`, `activation_token`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, '3T1c7vVcnT0IDLn1G2235KRc6dMrPTppW5CExi9J76ug8OACETufg6vIxJd2', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
+(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, 'VPINydJSPuPqe5HJ0YRN12fjFKTjeVaqiqhpnCtM3dLpZTZtCt26njbsTKxS', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
 (2, 'Jayanta Biswas', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$FJkWCH3yzXF1/bBzzxGfJu8Y0K/xGONkL3TatUc4obqX9XyscXKWm', 'general', NULL, 1, 'dahPUWcWLXbDMo9poPQpGsI3TE3nOAsbkbVmqz6y5byd9rXzLGVzfzhaUufN', '2019-02-13 05:38:06', '2019-02-13 05:39:00');
 
 --
@@ -381,6 +415,12 @@ ALTER TABLE `attendances`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `missions`
+--
+ALTER TABLE `missions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -477,19 +517,25 @@ ALTER TABLE `adminmeta`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `missions`
+--
+ALTER TABLE `missions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`

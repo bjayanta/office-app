@@ -33,6 +33,9 @@ Vue.component('passport-personal-access-tokens', require('./components/passport/
 Vue.component('todo-create', require('./components/todo/CreateComponent.vue'));
 Vue.component('todo-update', require('./components/todo/UpdateComponent.vue'));
 
+// Mission components
+Vue.component('mission-details', require('./components/mission/DetailsComponent.vue'));
+
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 /**
@@ -44,6 +47,7 @@ Vue.component('todo-update', require('./components/todo/UpdateComponent.vue'));
 const routes = [
     { path: '/', component: require('./components/HomeComponent.vue') },
     { path: '/todo', component: require('./components/todo/ListComponent.vue') },
+    { path: '/mission', component: require('./components/mission/MissionComponent.vue') },
     { path: '/attendance', component: require('./components/attendance/AttendanceComponent.vue') },
     { path: '/passport', component: require('./components/PassportComponent.vue') },
 ];

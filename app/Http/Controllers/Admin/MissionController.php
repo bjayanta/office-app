@@ -19,9 +19,21 @@ class MissionController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index(Request $request) {
         $agents = User::all();
-        return view('admin.mission.index', compact('agents'));
+        $missions = Mission::whereIn('status', ['pending', 'process'])->paginate(5);
+
+        if($request->agent != null) {
+            $where = [
+                ['user_id', '=', $request->agent],
+                ['status', '=', $request->status],
+            ];
+
+            $missions = Mission::where($where)->paginate(5);
+            $missions->appends($request->only('agent', 'status'));
+        }
+
+        return view('admin.mission.index', compact('agents', 'missions'));
     }
 
     /**

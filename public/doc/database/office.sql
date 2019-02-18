@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 17, 2019 at 01:06 PM
+-- Generation Time: Feb 18, 2019 at 01:06 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -58,7 +58,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `phone`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Suman Rajvhar', '01712179034', 'uis360.sraj@gmail.com', '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 1, NULL, '2019-02-16 18:00:00', '2019-02-16 18:00:00');
+(1, 'Suman Rajvhar', '01712179034', 'uis360.sraj@gmail.com', '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 1, 'UL81IzVvlgGb0wAhV6508D7JeUofFTC6pP0C86Ub8XamnddDetfQFdEz0RoF', '2019-02-16 18:00:00', '2019-02-16 18:00:00');
 
 -- --------------------------------------------------------
 
@@ -105,7 +105,12 @@ INSERT INTO `attendances` (`id`, `user_id`, `ip_address`, `late_entry`, `early_l
 (10, 2, '::1', '182', NULL, 'in', '2019-02-17 06:02:12', '2019-02-17 06:02:12'),
 (11, 2, '::1', '443', NULL, 'in', '2019-02-17 10:23:18', '2019-02-17 10:23:18'),
 (12, 2, '::1', '503', NULL, 'in', '2019-02-17 11:23:29', '2019-02-17 11:23:29'),
-(13, 2, '::1', '511', NULL, 'in', '2019-02-17 11:31:12', '2019-02-17 11:31:12');
+(13, 2, '::1', '511', '15', 'out', '2019-02-17 11:31:12', '2019-02-17 12:15:27'),
+(14, 1, '::1', '380', '158', 'out', '2019-02-18 09:20:13', '2019-02-18 09:21:00'),
+(15, 1, '::1', '381', '93', 'out', '2019-02-18 09:21:29', '2019-02-18 10:26:53'),
+(16, 1, '::1', '446', '9', 'out', '2019-02-18 10:26:55', '2019-02-18 11:50:40'),
+(17, 2, '::1', '530', '7', 'out', '2019-02-18 11:50:50', '2019-02-18 11:52:36'),
+(18, 1, '::1', '532', NULL, 'in', '2019-02-18 11:52:56', '2019-02-18 11:52:56');
 
 -- --------------------------------------------------------
 
@@ -150,12 +155,21 @@ CREATE TABLE `missions` (
   `admin_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` text COLLATE utf8mb4_unicode_ci,
   `priority` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'low' COMMENT 'low/medium/high/emergency',
   `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'pending/process/done/cancel',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `missions`
+--
+
+INSERT INTO `missions` (`id`, `admin_id`, `user_id`, `title`, `note`, `priority`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Fiesta Cellular', 'Fiesta Cellular is a smartphone and accessory store in Dallas Metroplex. Fiesta Cellular offers the freedom to its customers to remove the shackle of the long-term commitment to cell phone service providers. Fiesta Cellular offer the discounted prices on most of the smartphones', 'medium', 'pending', '2019-02-18 11:42:37', '2019-02-18 11:42:37'),
+(2, 1, 2, 'fsaf', 'asdfasdf', 'high', 'pending', '2019-02-18 11:43:58', '2019-02-18 11:43:58'),
+(3, 1, 2, 'asdf', 'asdfas asdf asdf asdfas', 'emergency', 'pending', '2019-02-18 11:45:11', '2019-02-18 11:45:11');
 
 -- --------------------------------------------------------
 
@@ -376,8 +390,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `account_type`, `activation_token`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, 'VPINydJSPuPqe5HJ0YRN12fjFKTjeVaqiqhpnCtM3dLpZTZtCt26njbsTKxS', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
-(2, 'Jayanta Biswas', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$FJkWCH3yzXF1/bBzzxGfJu8Y0K/xGONkL3TatUc4obqX9XyscXKWm', 'general', NULL, 1, 'dahPUWcWLXbDMo9poPQpGsI3TE3nOAsbkbVmqz6y5byd9rXzLGVzfzhaUufN', '2019-02-13 05:38:06', '2019-02-13 05:39:00');
+(1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 'general', NULL, 1, 'RcKIxH40TK9QUSBkasTtXF1zkXSypuMRAxeFuZ6nn5kCKtreT0Hsr8mA6ejS', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
+(2, 'Jayanta Biswas', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$FJkWCH3yzXF1/bBzzxGfJu8Y0K/xGONkL3TatUc4obqX9XyscXKWm', 'general', NULL, 1, 'LFQAKEl43PNybtu6siSfjrwyt9dwKFTJmNeA4yvJfdaaBwNsyOu4WqqTulD6', '2019-02-13 05:38:06', '2019-02-13 05:39:00');
 
 --
 -- Indexes for dumped tables
@@ -523,7 +537,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -535,7 +549,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `missions`
 --
 ALTER TABLE `missions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`

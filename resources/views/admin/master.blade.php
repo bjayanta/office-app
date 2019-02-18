@@ -8,11 +8,17 @@
         <div id="app">
             @include('admin.layouts.header')
 
-            @section('main-content')
-                @show
-        </div>
+            <main class="py-4">
+                <div class="container">
+                    @include('layouts.partials.alert')
+                </div>
 
-        @include('admin.layouts.footer')
+                @section('main-content')
+                @show
+            </main>
+
+            @include('admin.layouts.footer')
+        </div>
     </body>
 </html>
 

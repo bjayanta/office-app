@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
+use App\Models\Mission;
+use App\Models\User\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,9 +19,9 @@ class MissionController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $agents = User::all();
+        return view('admin.mission.index', compact('agents'));
     }
 
     /**
@@ -26,9 +29,9 @@ class MissionController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $agents = User::all();
+        return view('admin.mission.create', compact('agents'));
     }
 
     /**
@@ -37,9 +40,18 @@ class MissionController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $mission = new Mission();
+        $mission->admin_id = Auth::user()->id;
+        $mission->user_id = $request->agent;
+        $mission->title  = $request->title;
+        $mission->note = $request->note;
+        $mission->priority = $request->priority;
+        $mission->save();
+
+        $request->session()->flash('success', "Mission set successfully!");
+
+        return redirect()->back();
     }
 
     /**

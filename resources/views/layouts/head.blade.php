@@ -7,7 +7,7 @@
 <title>{{ config('app.name', 'Laravel') }}</title>
 
 <!-- Scripts -->
-<script src="{{ asset('public/user/js/app.js') }}" defer></script>
+<script src="{{ asset('public/user/js/app-user.js') }}" defer></script>
 
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,4 +18,4 @@
 <link href="https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css" rel="stylesheet">
 
 <!-- Styles -->
-<link href="{{ asset('public/user/css/app.css') }}" rel="stylesheet">
+<link href="{{ asset('public/user/css/app-user.css') }}" rel="stylesheet">

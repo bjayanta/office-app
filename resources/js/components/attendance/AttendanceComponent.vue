@@ -16,7 +16,7 @@
                             <th scope="col">Entry</th>
                             <th scope="col">LE</th>
                             <th scope="col">Exit</th>
-                            <th scope="col">RL</th>
+                            <th scope="col">EL</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>

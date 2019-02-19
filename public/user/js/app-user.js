@@ -56137,7 +56137,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Exit")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("RL")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("EL")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
       ])

@@ -28,24 +28,26 @@ class TraceUserLogout
     public function handle(Logout $event) {
         // dd($event->user);
 
-        $where = [
-            ['user_id', '=', $event->user->id],
-            ['ip_address', '=', \Request::ip()]
-        ];
+        if($event->guard != 'admin') {
+            $where = [
+                ['user_id', '=', $event->user->id],
+                ['ip_address', '=', \Request::ip()]
+            ];
 
-        $attendance = Attendance::where($where)->orderBy('id', 'DESC')->first();
-        // dd($attendance);
+            $attendance = Attendance::where($where)->orderBy('id', 'DESC')->first();
+            // dd($attendance);
 
-        $where[] = ['id', '=', $attendance->id];
-        // dd($where);
+            $where[] = ['id', '=', $attendance->id];
+            // dd($where);
 
-        // realy leave
-        $to = \Carbon\Carbon::now();
-        $from = \Carbon\Carbon::parse(config('coderill.exitTime'));
+            // realy leave
+            $to = \Carbon\Carbon::now();
+            $from = \Carbon\Carbon::parse(config('coderill.exitTime'));
 
-        $attendance = Attendance::where($where)->firstOrFail();
-        $attendance->early_leave = $to->diffInMinutes($from);
-        $attendance->status = 'out';
-        $attendance->save();
+            $attendance = Attendance::where($where)->firstOrFail();
+            $attendance->early_leave = $to->diffInMinutes($from);
+            $attendance->status = 'out';
+            $attendance->save();
+        }
     }
 }

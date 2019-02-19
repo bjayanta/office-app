@@ -27,7 +27,7 @@
                             <td>{{ mission.date }}</td>
                             <td>{{ mission.owner }}</td>
                             <td>
-                                <a href="" data-toggle="modal" data-target="#detailsModal">
+                                <a href="" data-toggle="modal" data-target="#detailsModal" @click="details(key)">
                                     <strong>{{ mission.title }}</strong>
                                     <p>{{ mission.description }}</p>
                                 </a>
@@ -35,9 +35,9 @@
                             <td>{{ mission.priority.toUpperCase() }}</td>
                             <td>{{ mission.status.toUpperCase() }}</td>
                             <td class="text-right">
-                                <button class="btn btn-primary">Done</button>
-                                <button class="btn btn-warning">Process</button>
-                                <button class="btn btn-danger">Cancel</button>
+                                <button class="btn btn-primary" @click="setStatus(key, 'done')">Done</button>
+                                <button class="btn btn-warning" @click="setStatus(key, 'process')">Process</button>
+                                <button class="btn btn-danger" @click="setStatus(key, 'cancel')">Cancel</button>
                             </td>
                         </tr>
                     </tbody>
@@ -69,7 +69,20 @@ export default {
                     console.log(response.data);
                 })
                 .catch(error => console.log(error));
-        }
+        },
+        details(i) {
+            Event.$emit('mission', this.missions[i]);
+            console.log(this.missions[i]);
+        },
+        setStatus(key, status) {
+            axios.patch('./mission/' + this.missions[key].id, {
+                status: status
+            })
+            .then(response => {
+                this.missions[key].status = response.data.status;
+                console.log(response.data);
+            }).catch(error => console.log(error));
+        },
     }
 }
 </script>

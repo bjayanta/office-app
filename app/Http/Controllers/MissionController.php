@@ -24,6 +24,7 @@ class MissionController extends Controller {
 
         foreach($data as $row) {
             $records[] = [
+                'id' => $row->id,
                 'date' => $row->created_at->diffForHumans(),
                 'owner' => $row->owner->name,
                 'user' => $row->user->name,
@@ -35,5 +36,15 @@ class MissionController extends Controller {
         }
 
         return response()->json($records, 200);
+    }
+
+    public function update(Request $request, $id) {
+        // return $request->status;
+
+        $mission = Mission::findOrFail($id);
+        $mission->status = $request->status;
+        $mission->save();
+
+        return response()->json($mission, 200);
     }
 }

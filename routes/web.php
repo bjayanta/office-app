@@ -21,8 +21,9 @@ Route::resources([
     'todo' => 'Todo\TaskController', // todo resource route
 ]);
 
-// attendance route
+// mission route
 Route::get('/mission', 'MissionController@index')->name('mission');
+Route::patch('/mission/{id}', 'MissionController@update')->name('mission.update')->where('id', '[0-9]+');
 
 // attendance route
 Route::get('/attendance', 'AttendanceController@index')->name('attendance');

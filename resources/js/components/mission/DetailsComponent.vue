@@ -11,8 +11,8 @@
                 </div>
 
                 <div class="modal-body">
-                    <h3>Mission title</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro animi id aliquam omnis nostrum itaque a doloribus vitae blanditiis saepe aperiam rem debitis aspernatur temporibus ratione, officia non accusamus pariatur? Distinctio dolorum a expedita quia ex ullam autem, consectetur hic sed tempore omnis temporibus eligendi totam magni architecto nisi facilis.</p>
+                    <h3>{{ mission.title }}</h3>
+                    <p>{{ mission.description }}</p>
                 </div>
 
                 <div class="modal-footer">
@@ -27,10 +27,15 @@
     export default {
         data() {
             return {
-
+                mission: [],
             };
         },
         mounted() {
+            Event.$on('mission', data => {
+                this.mission = data;
+                console.log(data);
+            });
+
             console.log('Mission details component mounted.')
         },
     }

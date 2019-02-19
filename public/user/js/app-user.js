@@ -53739,9 +53739,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            mission: []
+        };
     },
     mounted: function mounted() {
+        var _this = this;
+
+        Event.$on('mission', function (data) {
+            _this.mission = data;
+            console.log(data);
+        });
+
         console.log('Mission details component mounted.');
     }
 });
@@ -53754,84 +53763,79 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "detailsModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "DetailsModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.mission.title))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.mission.description))])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "detailsModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "DetailsModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "DetailsModalLabel" }
-                  },
-                  [_vm._v("Mission details")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("h3", [_vm._v("Mission title")]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro animi id aliquam omnis nostrum itaque a doloribus vitae blanditiis saepe aperiam rem debitis aspernatur temporibus ratione, officia non accusamus pariatur? Distinctio dolorum a expedita quia ex ullam autem, consectetur hic sed tempore omnis temporibus eligendi totam magni architecto nisi facilis."
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "DetailsModalLabel" } },
+        [_vm._v("Mission details")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -54300,7 +54304,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54385,6 +54389,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 return console.log(error);
             });
+        },
+        details: function details(i) {
+            Event.$emit('mission', this.missions[i]);
+            console.log(this.missions[i]);
+        },
+        setStatus: function setStatus(key, status) {
+            var _this2 = this;
+
+            axios.patch('./mission/' + this.missions[key].id, {
+                status: status
+            }).then(function (response) {
+                _this2.missions[key].status = response.data.status;
+                console.log(response.data);
+            }).catch(function (error) {
+                return console.log(error);
+            });
         }
     }
 });
@@ -54428,6 +54448,11 @@ var render = function() {
                           href: "",
                           "data-toggle": "modal",
                           "data-target": "#detailsModal"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.details(key)
+                          }
                         }
                       },
                       [
@@ -54442,7 +54467,46 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(mission.status.toUpperCase()))]),
                   _vm._v(" "),
-                  _vm._m(2, true)
+                  _c("td", { staticClass: "text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.setStatus(key, "done")
+                          }
+                        }
+                      },
+                      [_vm._v("Done")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning",
+                        on: {
+                          click: function($event) {
+                            _vm.setStatus(key, "process")
+                          }
+                        }
+                      },
+                      [_vm._v("Process")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            _vm.setStatus(key, "cancel")
+                          }
+                        }
+                      },
+                      [_vm._v("Cancel")]
+                    )
+                  ])
                 ])
               }),
               0
@@ -54493,18 +54557,6 @@ var staticRenderFns = [
           _vm._v("Action")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-right" }, [
-      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Done")]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Process")]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Cancel")])
     ])
   }
 ]

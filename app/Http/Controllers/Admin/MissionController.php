@@ -72,9 +72,9 @@ class MissionController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        $record = Mission::find($id);
+        return view('admin.mission.show', compact('record'));
     }
 
     /**
@@ -83,9 +83,11 @@ class MissionController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+        $agents = User::all();
+        $record = Mission::find($id);
+
+        return view('admin.mission.edit', compact('agents', 'record'));
     }
 
     /**
@@ -95,9 +97,17 @@ class MissionController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $mission = Mission::findOrFail($id);
+        $mission->user_id = $request->agent;
+        $mission->title  = $request->title;
+        $mission->note = $request->note;
+        $mission->priority = $request->priority;
+        $mission->save();
+
+        $request->session()->flash('success', "Mission information changed successfully!");
+
+        return redirect()->back();
     }
 
     /**
@@ -106,8 +116,8 @@ class MissionController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        Mission::where('id', $id)->delete();
+        return redirect()->back();
     }
 }

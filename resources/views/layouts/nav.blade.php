@@ -37,6 +37,7 @@
                     <li class="nav-item"><router-link class="nav-link" to="/todo" exact>Todo</router-link></li>
                     <li class="nav-item"><router-link class="nav-link" to="/mission" exact>Mission</router-link></li>
                     <li class="nav-item"><router-link class="nav-link" to="/attendance" exact>Attendance</router-link></li>
+                    <li class="nav-item"><router-link class="nav-link" to="/report" exact>Report</router-link></li>
                     <li class="nav-item"><router-link class="nav-link" to="/passport" exact>Passport</router-link></li>
 
                     <li class="nav-item dropdown">

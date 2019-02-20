@@ -49,6 +49,8 @@ const routes = [
     { path: '/todo', component: require('./components/todo/ListComponent.vue') },
     { path: '/mission', component: require('./components/mission/MissionComponent.vue') },
     { path: '/attendance', component: require('./components/attendance/AttendanceComponent.vue') },
+    { path: '/report', component: require('./components/report/ReportComponent.vue') },
+    { path: '/report-create', component: require('./components/report/ReportCreateComponent.vue') },
     { path: '/passport', component: require('./components/PassportComponent.vue') },
 ];
 

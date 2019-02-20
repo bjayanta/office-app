@@ -19,6 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::resources([
     'todo' => 'Todo\TaskController', // todo resource route
+    'report' => 'ReportController', // report resource route
 ]);
 
 // mission route

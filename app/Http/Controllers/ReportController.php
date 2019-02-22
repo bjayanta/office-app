@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Models\Mission;
-use App\Models\Attendance;
+use Carbon\Carbon;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
-class ReportController extends Controller
-{
+class ReportController extends Controller {
     /**
      * Create a new controller instance.
      *
@@ -18,94 +17,14 @@ class ReportController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function create(Request $request) {
+        $report = new Report();
+        $report->user_id = Auth::user()->id;
+        $report->comment = $request->comment;
+        $report->report_at = new Carbon($request->year . '-' . $request->month . '-' . $request->day);
+        $report->save();
+
+        return response()->json($report, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        $data = [];
-
-        // $where = [
-        //     ['user_id', '=', Auth::user()->id],
-        //     ['created_at', '>=', date('Y-m-d') . ' 00:00:00'],
-        // ];
-
-        // $data['attendance'] = Attendance::where($where)->get();
-
-        $where = [
-            ['user_id', '=', Auth::user()->id],
-            ['updated_at', '>=', date('Y-m-d') . ' 00:00:00']
-        ];
-
-        $data['missions'] = Mission::where($where)->get();
-
-        return response()->json($data, 200);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

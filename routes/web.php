@@ -19,7 +19,6 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::resources([
     'todo' => 'Todo\TaskController', // todo resource route
-    'report' => 'ReportController', // report resource route
 ]);
 
 // mission route
@@ -29,6 +28,9 @@ Route::patch('/mission/{id}', 'MissionController@update')->name('mission.update'
 // attendance route
 Route::get('/attendance', 'AttendanceController@index')->name('attendance');
 
+// report route
+Route::post('/report/create', 'ReportController@create');
+
 Route::get('/locale/{lang}', function($lang) {
     \Session::put('locale', $lang);
     return redirect()->back();
@@ -37,6 +39,10 @@ Route::get('/locale/{lang}', function($lang) {
 // Admin controller
 Route::group(['namespace' => 'Admin'], function() {
     Route::get('admin/home', 'HomeController@index')->name('admin.home');
+
+    // report routes
+    Route::get('admin/report', 'ReportController@index')->name('admin.report');
+    Route::get('admin/report/show/{id}', 'ReportController@show')->name('admin.report.show');
 
     // attendance route
     Route::get('admin/attendance', 'AttendanceController@index')->name('admin.attendance');

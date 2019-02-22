@@ -15,6 +15,7 @@
                 <li class="nav-item"><a class="nav-link active" href="{{ route('profile.index') }}">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('admin.attendance') }}">Attendance</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('mission.index') }}">Mission</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('admin.report') }}">Report</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('account.index') }}">Users</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('role.index') }}">Roles</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('permission.index') }}">Permission</a></li>

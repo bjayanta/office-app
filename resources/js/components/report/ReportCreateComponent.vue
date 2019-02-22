@@ -1,67 +1,30 @@
 <template>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h4>Generator</h4>
-                <hr>
-
-                <form action="" @submit="addJob">
-                    <div class="form-group">
-                        <input v-model="temp.title" type="text" class="form-control" placeholder="Job Title" required>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea v-model="temp.description" class="form-control" placeholder="Description" rows="3" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <select v-model="temp.status" class="form-control" required>
-                            <option value="done">Done</option>
-                            <option value="cancel">Cancel</option>
-                            <option value="process">Process</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group text-right">
-                        <button type="reset" class="btn btn-danger">Clear</button>
-                        <button type="submit" class="btn btn-primary"> + </button>
-                    </div>
-                </form>
-
-                <div class="form-group">
-                    <label for="others">Others concern</label>
-                    <textarea v-model="form.others" class="form-control" id="others" rows="3"></textarea>
-                </div>
+        <form action="" @submit="saveTasks" class="row">
+            <div class="form-group col-md-4">
+                <label for="year">Date (Year)</label>
+                <input type="text" id="year" class="form-control" v-model="form.year" placeholder="Year" required>
             </div>
 
-            <div class="col-md-8">
-                <h4>Preview </h4>
-                <hr>
-
-                <form action="" @submit="saveChanges">
-                    <ul>
-                        <li v-for="(job, key) in form.jobs" :key="key">
-                            <h5>
-                                {{ job.title }}
-                                <small class="float-right">{{ job.status.toUpperCase() }}</small>
-                            </h5>
-
-                            <p>{{ job.description }}</p>
-                        </li>
-                    </ul>
-
-                    <div v-if="form.others !== ''">
-                        <strong>Others concern</strong>
-                        <p>{{ form.others }}</p>
-                    </div>
-
-                    <div class="form-group">
-                        <a class="btn btn-danger" @click="cancel">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Sent your progress</button>
-                    </div>
-                </form>
+            <div class="form-group col-md-4">
+                <label for="month">Date (Month)</label>
+                <input type="text" id="month" class="form-control" v-model="form.month" placeholder="Month" required>
             </div>
-        </div>
+
+            <div class="form-group col-md-4">
+                <label for="day">Date (Day)</label>
+                <input type="text" id="day" class="form-control" v-model="form.day" placeholder="Day" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="comment">Comment</label>
+                <textarea id="comment" v-model="form.comment" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group col-md-12 text-right">
+                <button type="submit" class="btn btn-primary">Send your progress</button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -69,48 +32,26 @@
     export default {
         data() {
             return {
-                temp: {
-                    status: 'done',
-                },
                 form: {
-                    jobs: [],
-                    others: '',
+                    year: new Date().getFullYear().toString(),
+                    month: (new Date().getMonth() + 1).toString(),
+                    day: new Date().getDate().toString(),
+                    comment: '',
                 },
             };
         },
         mounted() {
-            console.log('Report component mounted.');
+            console.log('Report task component mounted.');
         },
         methods: {
-            saveChanges(e) {
-                console.log(this.form);
-                e.preventDefault();
-            },
-            cancel(e) {
-                this.form = {
-                    jobs: [],
-                    others: '',
-                };
+            saveTasks(e) {
+                axios.post('./report/create', this.form)
+                .then(response => {
+                    this.form.comment = '';
+                    console.log(response.data);
+                })
+                .catch(errors => console.log(errors));
 
-                this.temp = {
-                    status: 'done',
-                };
-
-                e.preventDefault();
-            },
-            addJob(e) {
-                let job = {
-                    'title': this.temp.title,
-                    'description': this.temp.description,
-                    'status': this.temp.status,
-                };
-
-                this.form.jobs.push(job);
-                this.temp = {
-                    status: 'done',
-                };
-
-                console.log(this.temp);
                 e.preventDefault();
             }
         },
@@ -118,13 +59,5 @@
 </script>
 
 <style>
-    .mission {
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
+
 </style>
-
-
-

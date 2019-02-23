@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Carbon\Carbon;
+use App\Models\Report;
 use App\Models\Mission;
 use Illuminate\Http\Request;
 
@@ -39,8 +40,15 @@ class MissionController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        // return $request->status;
+        // insert mission record into report
+        $report = new Report();
+        $report->user_id = Auth::user()->id;
+        $report->mission_id = $id;
+        $report->report_at = date('Y-m-d');
+        $report->comment = $request->status;
+        $report->save();
 
+        // update mission status
         $mission = Mission::findOrFail($id);
         $mission->status = $request->status;
         $mission->save();

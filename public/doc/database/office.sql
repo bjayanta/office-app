@@ -2,10 +2,10 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 22, 2019 at 07:56 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Host: localhost
+-- Generation Time: Feb 23, 2019 at 10:25 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -58,7 +58,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `phone`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Suman Rajvhar', '01712179034', 'uis360.sraj@gmail.com', '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 1, 'ZCE1c3LyHH9qn2Pz1qx4lvvPSYGZdyXckVtyxfRaBlPkhLjbDJ1aPjakjVBC', '2019-02-16 18:00:00', '2019-02-16 18:00:00');
+(1, 'Suman Rajvhar', '01712179034', 'uis360.sraj@gmail.com', '$2y$10$mfdT34fz9dnurOCHa4xrJeqe.NLXFqUzQw6DYTV9LX92oXDmsVSM6', 1, 'drGhqtSK1kHOrcWe3O3gXUbJ1ZJCJz1WmdxeHRIa5anS1lrBiEClPVcwfnjq', '2019-02-16 18:00:00', '2019-02-16 18:00:00');
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,10 @@ INSERT INTO `attendances` (`id`, `user_id`, `ip_address`, `late_entry`, `early_l
 (5, 2, '::1', '796', '260', 'out', '2019-02-21 16:16:25', '2019-02-21 16:20:09'),
 (6, 2, '::1', '344', '142', 'out', '2019-02-22 08:44:21', '2019-02-22 09:37:19'),
 (7, 2, '::1', '431', '88', 'out', '2019-02-22 10:11:54', '2019-02-22 10:31:08'),
-(8, 2, '::1', '451', '216', 'out', '2019-02-22 10:31:51', '2019-02-22 15:36:12');
+(8, 2, '::1', '451', '216', 'out', '2019-02-22 10:31:51', '2019-02-22 15:36:12'),
+(9, 2, '::1', '94', NULL, 'in', '2019-02-23 04:34:24', '2019-02-23 04:34:24'),
+(10, 2, '::1', '233', '306', 'out', '2019-02-23 06:53:10', '2019-02-23 06:53:18'),
+(11, 2, '::1', '242', '255', 'out', '2019-02-23 07:02:00', '2019-02-23 07:44:10');
 
 -- --------------------------------------------------------
 
@@ -158,11 +161,11 @@ CREATE TABLE `missions` (
 --
 
 INSERT INTO `missions` (`id`, `admin_id`, `user_id`, `title`, `note`, `priority`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 'Fiesta', 'Complete the project asap.', 'low', 'process', '2019-02-17 04:30:00', '2019-02-22 10:35:11'),
+(1, 1, 2, 'Fiesta', 'Complete the project asap.', 'low', 'done', '2019-02-17 04:30:00', '2019-02-23 07:20:24'),
 (2, 1, 1, 'Pizza House', 'Complete the project asap.', 'low', 'done', '2019-02-16 18:00:00', '2019-02-16 18:00:00'),
-(3, 1, 2, 'HD24', 'Complete the project asap.', 'low', 'done', '2019-02-16 18:00:00', '2019-02-22 10:35:11'),
+(3, 1, 2, 'HD24', 'Complete the project asap.', 'low', 'process', '2019-02-16 18:00:00', '2019-02-23 07:20:24'),
 (4, 1, 2, '2nd Openion', 'Complete the project asap.', 'low', 'cancel', '2019-02-16 18:00:00', '2019-02-21 16:18:34'),
-(5, 1, 2, 'Office management', 'Complete the project asap.', 'low', 'done', '2019-02-16 18:00:00', '2019-02-22 10:34:00'),
+(5, 1, 2, 'Office management', 'Complete the project asap.', 'low', 'process', '2019-02-16 18:00:00', '2019-02-23 04:34:50'),
 (6, 1, 1, 'Liquor store', 'Complete the project asap.', 'low', 'pending', '2019-02-16 18:00:00', '2019-02-16 18:00:00'),
 (7, 1, 1, 'Fiesta', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta nostrum expedita est perspiciatis nihil dolor non provident illo, labore quo qui explicabo eaque voluptatum fuga vero amet sint quaerat autem inventore nulla? Repellendus rem corporis inventore, aut optio.', 'low', 'pending', '2019-02-18 07:48:05', '2019-02-18 07:48:05'),
 (8, 1, 1, 'Git', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 'medium', 'pending', '2019-02-18 07:48:28', '2019-02-18 07:48:28'),
@@ -324,6 +327,7 @@ CREATE TABLE `permission_role` (
 CREATE TABLE `reports` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
+  `mission_id` int(11) UNSIGNED DEFAULT NULL,
   `comment` text COLLATE utf8mb4_unicode_ci,
   `report_at` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -334,12 +338,12 @@ CREATE TABLE `reports` (
 -- Dumping data for table `reports`
 --
 
-INSERT INTO `reports` (`id`, `user_id`, `comment`, `report_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'sdfgs', '2019-02-22', '2019-02-23 15:31:21', '2019-02-23 01:17:29'),
-(2, 1, 'sdfgs', '2019-02-22', '2019-02-23 15:31:21', '2019-02-23 15:31:21'),
-(3, 2, 'sdfgs', '2019-02-22', '2019-02-23 15:31:21', '2019-02-23 15:31:21'),
-(4, 1, 'sdfgs', '2019-02-22', '2019-02-23 15:31:21', '2019-02-23 15:31:21'),
-(5, 2, 'sdfgs', '2019-02-22', '2019-02-23 15:31:21', '2019-02-23 15:31:21');
+INSERT INTO `reports` (`id`, `user_id`, `mission_id`, `comment`, `report_at`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 'done', '2019-02-23', '2019-02-23 07:20:24', '2019-02-23 07:20:24'),
+(2, 2, 3, 'process', '2019-02-23', '2019-02-23 07:20:24', '2019-02-23 07:20:24'),
+(3, 2, 4, 'cancel', '2019-02-23', '2019-02-23 07:20:25', '2019-02-23 07:20:25'),
+(4, 2, 5, 'process', '2019-02-23', '2019-02-23 07:20:26', '2019-02-23 07:20:26'),
+(5, 2, NULL, 'Hello World', '2019-02-23', '2019-02-23 07:20:46', '2019-02-23 07:20:46');
 
 -- --------------------------------------------------------
 
@@ -419,7 +423,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `account_type`, `activation_token`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Jayanta Biswas', '01775219457', 'uis360.jayanta@gmail.com', NULL, '$2y$10$bpfvfuPF4E31H0GG3U25sOP1pxLXocN5iJVSo.E1F30chLZin.1Mm', 'general', NULL, 1, 'VPINydJSPuPqe5HJ0YRN12fjFKTjeVaqiqhpnCtM3dLpZTZtCt26njbsTKxS', '2019-02-12 01:43:28', '2019-02-12 01:44:06'),
-(2, 'Maruf Hasan', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$bpfvfuPF4E31H0GG3U25sOP1pxLXocN5iJVSo.E1F30chLZin.1Mm', 'general', NULL, 1, 'feiBEKXKPFmEwIO6HwlITaiTDynOeoVtiinjaMutZzwsqnPYA2QhmIOOnpwK', '2019-02-13 05:38:06', '2019-02-13 05:39:00'),
+(2, 'Maruf Hasan', '01903402828', 'bjayanta.neo@gmail.com', NULL, '$2y$10$bpfvfuPF4E31H0GG3U25sOP1pxLXocN5iJVSo.E1F30chLZin.1Mm', 'general', NULL, 1, 'ytLlkEnOvozRl9pC0QgYCQljHqR5EWyBbrKmey0rebITNPWazjfB2ifNewAd', '2019-02-13 05:38:06', '2019-02-13 05:39:00'),
 (3, 'Ariful Islam', '01775219458', 'bjayanta.me@gmail.com', NULL, '$2y$10$bpfvfuPF4E31H0GG3U25sOP1pxLXocN5iJVSo.E1F30chLZin.1Mm', 'general', 'VYNnv0JtNz2aRn7bxvnHq84tVhTIS8xM0rQVWFtd', 0, '4pVg03lCnJBl5rTiiEPbyIFj1DPLwOPo5zSPdkJci8mvtcvlTgCEagvpUJ3f', '2019-02-17 08:22:39', '2019-02-17 08:22:39');
 
 --
@@ -572,7 +576,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `migrations`

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Report;
 use App\Models\Mission;
 use App\Models\User\User;
@@ -50,19 +51,25 @@ class ReportController extends Controller {
         // get report
         $report = Report::find($id);
 
+        // get reports
+        $where = [
+            ['user_id', '=', $report->user_id],
+            ['created_at', '>=', $report->report_at . ' 00:00:00'],
+            ['updated_at', '<=', $report->report_at . ' 23:59:59'],
+        ];
+
+        $reports = Report::where($where)->get();
+
         // get attendance
         $where = [
             ['user_id', '=', $report->user_id],
             ['created_at', '>=', $report->report_at . ' 00:00:00'],
-            ['updated_at', '<=', $report->report_at . ' 24:00:00'],
+            ['updated_at', '<=', $report->report_at . ' 23:59:59'],
         ];
 
         $attendances = Attendance::where($where)->get();
 
-        // get mission
-        $missions = Mission::where($where)->get();
-
-        return view('admin.report.daily', compact('report', 'attendances', 'missions'));
+        return view('admin.report.daily', compact('reports', 'attendances'));
     }
 
 }

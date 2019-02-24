@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSponsorsTable extends Migration
+class CreateMetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSponsorsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_sys')->create('sponsors', function (Blueprint $table) {
+        Schema::connection('sqlite')->create('metas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('auth');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('website');
+            $table->string('meta_key');
+            $table->text('meta_value')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateSponsorsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_sys')->dropIfExists('sponsors');
+        Schema::connection('sqlite')->dropIfExists('metas');
     }
 }

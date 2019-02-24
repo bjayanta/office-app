@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\System\Meta;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $meta = Meta::all();
+        return view('home', compact('meta'));
     }
 
     public function generateToken() {

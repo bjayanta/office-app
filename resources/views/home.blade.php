@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-
+        <pre>{{ print_r($meta->toArray(), 1) }}</pre>
     </div>
 
     <!-- all the view -->
